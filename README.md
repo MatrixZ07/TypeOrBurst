@@ -1,6 +1,5 @@
 # TypeOrBurst
 "The Last Bubble - Type or Burst" is a 2D topdown typing game.
-.
 Gameplay:
   - Type words to protect the bubble from bursting by enemy collision!
   - The less typing errors, the higher your multiplier, the higher your final score!
