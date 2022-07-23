@@ -4,9 +4,9 @@ Gameplay:
   - Type words to protect the bubble from bursting by enemy collision!
   - The less typing errors, the higher your multiplier, the higher your final score!
 .
-It is my result of the "games practice" module of my game development course.
+The game was created as a project for my "games practice" module of my game development course. 
 .
-Total development time was about 4 weeks fulltime.
+Total development time was about 4 weeks fulltime. (Resumed development in July 2022)
 .
 Game features:
   - four different enemy types (normal, tank, fast, shadow)
@@ -20,4 +20,5 @@ Game features:
 .
 I am planning on publishing the game after my game development course on Steam. 
 .
-Impressions and feedback is very welcome!
+Impressions and feedback are very welcome!
+
