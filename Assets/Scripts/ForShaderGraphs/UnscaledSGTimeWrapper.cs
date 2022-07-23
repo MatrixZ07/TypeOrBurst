@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class UnscaledSGTimeWrapper : MonoBehaviour
 {
-    //Um BubbleWobble-Effekt in Menüsequenzen zu aktivieren
-    //Ermöglicht den Zugriff auf unscaledTime in ShaderGraph
+    //Um BubbleWobble-Effekt in MenÃ¼sequenzen zu aktivieren
+    //Ermoeglicht den Zugriff auf unscaledTime in ShaderGraph
         //Nachteil: ShaderGraph-Preview nicht funktional, wenn Property connected
 
     Material mat;

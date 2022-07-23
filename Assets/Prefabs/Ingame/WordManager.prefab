@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1745680362851892356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1745680362851892378}
+  - component: {fileID: 1745680362851892357}
+  - component: {fileID: 1745680362851892379}
+  - component: {fileID: 1745680362851892376}
+  - component: {fileID: 1745680362851892377}
+  - component: {fileID: 1745680362851892382}
+  m_Layer: 0
+  m_Name: WordManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1745680362851892378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745680362851892356}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 547.693, y: 258.80185, z: -228.86844}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1745680362851892357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745680362851892356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335faf150686bd04da4309d1ede93942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  words: []
+  randomEnemyType: {fileID: 1745680362851892382}
+  wordListManager: {fileID: 1745680362851892377}
+  wordSpawner: {fileID: 1745680362851892376}
+  highscore: {fileID: 0}
+  spawnTimer: 3
+  spawnTimeReduction: 0.05
+  spawncount: 10
+  waveCount: 0
+  enemiesIncoming: 0
+  uiManager: {fileID: 0}
+--- !u!114 &1745680362851892379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745680362851892356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a501fbe6affa69c4480269fb07ea5060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wordManager: {fileID: 1745680362851892357}
+--- !u!114 &1745680362851892376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745680362851892356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 901f59859399bc94b8430daeb78acddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalEnemyPrefab: {fileID: 6511800248717949116, guid: 709fdccaaf29233469ac7714d7d578d2, type: 3}
+  fastEnemyPrefab: {fileID: 6511800248717949116, guid: 83bd712a87186964ebcbbea6e0f12af2, type: 3}
+  tankEnemyPrefab: {fileID: 2929514210993637767, guid: 950cc35f594701244b40eba372e56fbf, type: 3}
+  shadowEnemyPrefab: {fileID: 6511800248717949116, guid: de075d97d5e1b9b49beba4162ad19a6d, type: 3}
+  wordCanvas: {fileID: 0}
+--- !u!114 &1745680362851892377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745680362851892356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f2f2e4b0a176241b9cdd3d16b05bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wordManager: {fileID: 1745680362851892357}
+  settingsMenu: {fileID: 0}
+  customWordInput: {fileID: 0}
+  defaultWordsTXT: {fileID: 4900000, guid: a20fb80956a86ef4288a04910bf90106, type: 3}
+--- !u!114 &1745680362851892382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745680362851892356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd41c29b6eebb8343bbe1a580463ea31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnemyTypes: 4
+  enemyPercentageDistribution: 460000000a0000000a0000000a000000

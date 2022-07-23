@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4519053701011270518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4519053701011270516}
+  - component: {fileID: 4519053701011270519}
+  - component: {fileID: 4519053701011270517}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4519053701011270516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519053701011270518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.03559321, y: -0.13350248, z: -5.88387}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4519053701011270519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519053701011270518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8afeca0ab86c55e49b72c1fbb04e504f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wordManager: {fileID: 0}
+  playerManager: {fileID: 0}
+  highscoreManager: {fileID: 0}
+  gamespeed: 1
+  uiManager: {fileID: 4519053701011270517}
+--- !u!114 &4519053701011270517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519053701011270518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab92ec1084db3c4fac87be8eb4fc9fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
+  mainmenu: {fileID: 0}
+  highscoresMenu: {fileID: 0}
+  settingsMenu: {fileID: 0}
+  pauseMenu: {fileID: 979553282067413149, guid: b2fe9622fcb0dea47ac3e51cfe802e77, type: 3}
+  pauseMenuInstance: {fileID: 0}
+  gameoverScreen: {fileID: 0}
+  inputContainer: {fileID: 0}
+  highscoreBoard: {fileID: 0}
+  gameoverHeadline: {fileID: 0}
+  highscoreManager: {fileID: 0}
+  highscoresNames: {fileID: 0}
+  highscoresScores: {fileID: 0}
+  yourScore: {fileID: 0}
+  userInput: {fileID: 0}
+  highscoreContainerPrefab: {fileID: 5536640877745875790, guid: 59eaba3be78b8604ab9ba8993504e270, type: 3}
+  highscoreContainer: {fileID: 0}
+  highscoresMenuBoard: {fileID: 0}
+  waveDisplay: {fileID: 0}
+  showWaveDisplay: 0

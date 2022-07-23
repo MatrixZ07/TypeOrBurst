@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
 
     public HighscoreManager highscoreManager;
 
-    //Für GameOverScreen
+    //Fï¿½r GameOverScreen
     public TextMeshProUGUI highscoresNames;
     public TextMeshProUGUI highscoresScores;
     public TextMeshProUGUI yourScore;
@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         gameUIElements = GameObject.FindGameObjectsWithTag("GameUI");
-        waveDisplay.gameObject.SetActive(false);
+        //waveDisplay.gameObject.SetActive(false);
     }
     private void Start()
     {
@@ -120,7 +120,7 @@ public class UIManager : MonoBehaviour
             if (highscoreManager.isNewHighscore())
             {
                 gameoverHeadline.text = "New Highscore";
-                //Zeige InputContainer. Über InputContainer's Submit wird dann highscoreBoard angezeigt.
+                //Zeige InputContainer. ï¿½ber InputContainer's Submit wird dann highscoreBoard angezeigt.
                 highscoreContainer.GetComponent<HighscoreBoardLoader>().ShowInputContainer(true);
             }
             else
@@ -147,7 +147,7 @@ public class UIManager : MonoBehaviour
             settingsMenu.SetActive(false);
         }
     }
-    public void ShowHighscores(bool show) //HIGHSCOREANZEIGE VOM HAUPTMENÜ
+    public void ShowHighscores(bool show) //HIGHSCOREANZEIGE VOM HAUPTMENï¿½
     {
         if (show)
         {
@@ -156,7 +156,7 @@ public class UIManager : MonoBehaviour
             if (GameObject.Find("HighscoresMenu") != null) {
                 highscoresMenuBoard = Instantiate(highscoreContainerPrefab, highscoreContainerPrefab.transform.localPosition, Quaternion.identity, highscoresMenu.transform) as GameObject;
                 highscoresMenuBoard.transform.localPosition = new Vector3(highscoresMenuBoard.transform.localPosition.x, highscoresMenuBoard.transform.localPosition.y - 50f, highscoresMenuBoard.transform.localPosition.z);
-                highscoresMenuBoard.GetComponent<HighscoreBoardLoader>().ShowInputContainer(false); //Über ShowInputContainer(false) wird auch DisplayHighscores() aufgerufen und die Anzeige mit den Highscores gefüttert.
+                highscoresMenuBoard.GetComponent<HighscoreBoardLoader>().ShowInputContainer(false); //ï¿½ber ShowInputContainer(false) wird auch DisplayHighscores() aufgerufen und die Anzeige mit den Highscores gefï¿½ttert.
             }
         }
         else
