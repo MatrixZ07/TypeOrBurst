@@ -27,11 +27,14 @@ public class WordManager : MonoBehaviour
     private int streakCap = 10;
 
     public int spawncount=10;
-    public int waveCount=0; //Wave-Zähler
+    public int waveCount=0; //Wave-Zï¿½hler
     Coroutine waveSpawn;
     public int enemiesIncoming; //Verbleibende Enemies der momentanen Welle
     private bool wavefinished;
 
+    [SerializeField]
+    private HUDManager hudManager;
+    
     public UIManager uiManager;
 
     private void Start()
@@ -41,15 +44,15 @@ public class WordManager : MonoBehaviour
     }
     // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX WAVEMANAGEMENT XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     /*WaveSpawn-Funktion : 
-     * Jede Welle kommen 10 extra Wörter hinzu. 
-     * Gegnertypen werden alle n Wellen hinzugefügt.
-     * Streak wird in Welle 1 zurückgesetzt, sonst beibehalten
+     * Jede Welle kommen 10 extra Wï¿½rter hinzu. 
+     * Gegnertypen werden alle n Wellen hinzugefï¿½gt.
+     * Streak wird in Welle 1 zurï¿½ckgesetzt, sonst beibehalten
      * verbleibende Enemies werden jede Welle gesetzt.
      */
     public void StartWave() {
         if (WaveCompleted()) {
             waveCount++;
-            uiManager.ShowWaveDisplay(waveCount);
+            hudManager.ShowWaveDisplay(waveCount);
             if (waveCount == 1)
             {
                 streak = 0;
@@ -125,8 +128,8 @@ public class WordManager : MonoBehaviour
                 case 4:
                     AddWord(wordSpawner.SpawnWord(WordSpawner.EnemyType.Shadow), randomType);
                     break;
-                    // Für zukünftiges Compound-word Hier AddCompound verwenden. --> AddCompount noch fertigstellen
-                    //i++; //Für Compounds i extra erhöhen, da zwei Wörter gespawned werden
+                    // Fï¿½r zukï¿½nftiges Compound-word Hier AddCompound verwenden. --> AddCompount noch fertigstellen
+                    //i++; //Fï¿½r Compounds i extra erhï¿½hen, da zwei Wï¿½rter gespawned werden
             }
             yield return new WaitForSeconds(Random.Range(1f,spawnTimer));
         }
@@ -236,7 +239,7 @@ public class WordManager : MonoBehaviour
     /*public void DestroyedByCollision() {
         if (activeWord != null && activeWord.GetWordDisplay() == null)
         {
-            //Falls das Wort durch Collision zerstört wurde bevor es fertig geschrieben wurde
+            //Falls das Wort durch Collision zerstï¿½rt wurde bevor es fertig geschrieben wurde
             //Debug.Log("Display " + activeWord.GetWordDisplay().ToString() + activeWord.ToString());
             //Debug.Log(words.ToString());
             words.Remove(activeWord);
@@ -246,7 +249,7 @@ public class WordManager : MonoBehaviour
     }*/ 
 
     private bool WordWithLetterFound(char letter) {
-        words = words.OrderBy(word => word.GetWordDisplay().transform.localPosition.y).ToList(); //Sortiert liste aufsteigend nach y-Positionen der WordDisplays der Wörter (nähestes Wort zuerst)
+        words = words.OrderBy(word => word.GetWordDisplay().transform.localPosition.y).ToList(); //Sortiert liste aufsteigend nach y-Positionen der WordDisplays der Wï¿½rter (nï¿½hestes Wort zuerst)
         foreach (Word word in words)
         {
             if (word.GetNextLetter() == letter)

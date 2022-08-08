@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public WordManager wordManager;
-    public  PlayerManager playerManager;
+    public PlayerManager playerManager;
     public HighscoreManager highscoreManager;
 
     [SerializeField] private float gamespeed = 1;
     private bool gamepaused = true;
 
     public UIManager uiManager;
+    private HUDManager hudManager;
     private bool gamestarted;
 
     private void Awake()
@@ -27,9 +29,7 @@ public class GameManager : MonoBehaviour
         playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
         FindObjectOfType<AudioManager>().Play("MenuSoundtrack");
         uiManager = gameObject.GetComponent<UIManager>();
-        uiManager.ShowGameUI(false);
         uiManager.ShowMainMenu(true);
-        uiManager.ShowGameOverScreen(false);
     }
 
     // Update is called once per frame
@@ -59,11 +59,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartGame() {
+    public void StartGame()
+    {
+        //Wenn Szenen implementiert sind auskommentieren
+        //SceneManager.LoadScene("IngameScene");
+        
+        //Das alles beim Laden der neuen Szene ausführen
         highscoreManager.ResetHighscore();
         playerManager.RevivePlayer();
         wordManager.SetInputPossible(true);
-        uiManager.ShowGameUI(true);
+        hudManager.ShowGameUI(true);
         wordManager.StartWave();
         ResumeGame();
         gamestarted = true;
@@ -86,18 +91,18 @@ public class GameManager : MonoBehaviour
         }
         gamestarted = false;
         PauseGame();
-        uiManager.ShowGameOverScreen(true);
+        hudManager.ShowGameOverScreen(true);
     }
 
     public void PauseGame() {
         if(gamestarted)
-            uiManager.ShowPauseMenu(true);
+            hudManager.ShowPauseMenu(true);
         Debug.Log("GAME PAUSED.");
         Time.timeScale = 0;
         gamepaused = true;
     }
     public void ResumeGame() {
-        uiManager.ShowPauseMenu(false);
+        hudManager.ShowPauseMenu(false);
         Time.timeScale = 1;
         gamepaused = false;
     }
