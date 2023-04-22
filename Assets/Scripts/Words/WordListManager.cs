@@ -26,13 +26,13 @@ public class WordListManager : MonoBehaviour
 	static List<string> activeWordList = new List<string>();
 
 	//Variable zur Speicherung der Dateipfade
-	private static string defaultWordListPath;
-	private static string customWordListPath;
+	private static readonly string defaultWordListPath = Application.persistentDataPath + "/defaultWordList.json";
+	private static readonly string customWordListPath = Application.persistentDataPath + "/customWordList.json";
 
     private void Awake()
     {
-        defaultWordListPath = Application.persistentDataPath + "/defaultWordList.json";
-		customWordListPath = Application.persistentDataPath + "/customWordList.json";
+        
+		
 	}
 
     private void Start()

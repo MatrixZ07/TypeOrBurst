@@ -18,13 +18,8 @@ public class SettingsMenu : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        savedText.gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(savedText!=null)
+            savedText.gameObject.SetActive(false);
     }
 
     public void SetVolume(float volume) {
@@ -33,7 +28,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public IEnumerator DisplaySaveText() //displayed save text im Settingsmenü
+    public IEnumerator DisplaySaveText() //displayed save text im Settingsmenï¿½
     {
         savedText.gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(3f);
@@ -44,58 +39,49 @@ public class SettingsMenu : MonoBehaviour
 	public void UseCustomListToggle(bool value)
 	{
         WordListManager.useCustomWordList = value;
-        if (value)
-        {
-            PlayerPrefs.SetInt("UseCustomWordList", 1);
-        }
-        else { 
-            PlayerPrefs.SetInt("UseCustomWordList", 0);
-
-        }
+        PlayerPrefs.SetInt("UseCustomWordList", value ? 1 : 0);
         PlayerPrefs.Save();
 	}
+    
     public void LoadPlayerPrefs() {
         //MasterVolume laden
-        if (PlayerPrefs.HasKey("MasterVolume"))
+        if (!PlayerPrefs.HasKey("MasterVolume"))
         {
-            masterVolume = PlayerPrefs.GetFloat("MasterVolume");
-            slider.value = masterVolume;
-            audioMixer.SetFloat("MasterVolume", Mathf.Log10(masterVolume) * 20);
-        }
-        else {
             Debug.Log("No MasterVolume saved in PlayerPrefs");
-        }
-        //UseCustomListToggle laden
-        if (PlayerPrefs.HasKey("UseCustomWordList"))
-        {
-            if (PlayerPrefs.GetInt("UseCustomWordList") == 1)
-            {
-                WordListManager.useCustomWordList = true;
-                toggle.SetIsOnWithoutNotify(true);
-            }
-            else if (PlayerPrefs.GetInt("UseCustomWordList") == 0) {
-                WordListManager.useCustomWordList = false;
-                toggle.SetIsOnWithoutNotify(false);
-            }
-        }
-        else { 
-            Debug.Log("No Boolean 'UseCustomWordList' saved in PlayerPrefs");
-        }
-        //HasCustomWordList laden
-        if (PlayerPrefs.HasKey("hasCustomWordList"))
-        {
-            if (PlayerPrefs.GetInt("hasCustomWordList") == 1)
-            {
-                WordListManager.hasCustomWordList = true;
-            }
-            else if (PlayerPrefs.GetInt("hasCustomWordList") == 0)
-            {
-                WordListManager.hasCustomWordList = false;
-            }
         }
         else
         {
-            Debug.Log("No Boolean 'hasCustomWordList' saved in PlayerPrefs");
+            masterVolume = PlayerPrefs.GetFloat("MasterVolume");
+            if(audioMixer!=null)
+                audioMixer.SetFloat("MasterVolume", Mathf.Log10(masterVolume) * 20);
+            if (slider != null)
+                slider.value = masterVolume;
         }
+
+        if(!PlayerPrefs.HasKey("hasCustomWordList"))
+            return;
+
+        WordListManager.hasCustomWordList = PlayerPrefs.GetInt("hasCustomWordList") switch
+        {
+            0 => false,
+            1 => true,
+            _ => WordListManager.hasCustomWordList
+        };
+
+        if (!PlayerPrefs.HasKey("UseCustomWordList"))
+            return;
+
+        WordListManager.useCustomWordList = PlayerPrefs.GetInt("UseCustomWordList") switch
+        {
+            0 => false,
+            1 => true,
+            _ => WordListManager.hasCustomWordList
+        };
+
+        if (toggle == null) return;
+        if(PlayerPrefs.GetInt("UseCustomWordList")==0)
+            toggle.SetIsOnWithoutNotify(false);
+        if(PlayerPrefs.GetInt("UseCustomWordList")==1)
+            toggle.SetIsOnWithoutNotify(true);
     }
 }

@@ -1046,6 +1046,7 @@ GameObject:
   - component: {fileID: 4457827209537718442}
   - component: {fileID: 4457827209537718445}
   - component: {fileID: 1843080737229737627}
+  - component: {fileID: 1386179709578956784}
   m_Layer: 0
   m_Name: HighscoreBoard
   m_TagString: Untagged
@@ -1140,12 +1141,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a3cc6c6ea15ed14da7d87d4c21f2bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highscoreHandler: {fileID: 1386179709578956784}
   highscoresNames: {fileID: 4457827207548183069}
   highscoresScores: {fileID: 4457827208586325737}
   yourScore: {fileID: 4457827209264346351}
   userInput: {fileID: 0}
   inputContainer: {fileID: 0}
   highscoreBoard: {fileID: 4457827209537718443}
+--- !u!114 &1386179709578956784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4457827209537718443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff74fb935ab2e994fadf74c719cb1f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highscores: []
 --- !u!1 &5563239593215986026
 GameObject:
   m_ObjectHideFlags: 0

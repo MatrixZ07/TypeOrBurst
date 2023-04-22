@@ -5,7 +5,7 @@ using TMPro;
 
 public class HighscoreBoardLoader : MonoBehaviour
 {
-    public HighscoreManager highscoreManager;
+    public HighscoreHandler highscoreHandler;
 
     public TextMeshProUGUI highscoresNames;
     public TextMeshProUGUI highscoresScores;
@@ -15,14 +15,6 @@ public class HighscoreBoardLoader : MonoBehaviour
     public GameObject inputContainer;
     public GameObject highscoreBoard;
     private void Awake()
-    {
-        //Get HighscoreManager und UIManager
-        highscoreManager = GameObject.FindGameObjectWithTag("HighscoreManager").GetComponent<HighscoreManager>();
-
-    }
-
-    // Update is called once per frame
-    void Update()
     {
 
     }
@@ -43,26 +35,26 @@ public class HighscoreBoardLoader : MonoBehaviour
     public void DisplayHighscores() //Reine Anzeige der Highscores im UI
     { 
         //Übertrag der Highscores in das UI
-        yourScore.text = highscoreManager.GetHighscore().ToString();
+        yourScore.text = CurrentScoreHandler.CurrentScore.ToString();
         //Anzeige mit neuen Daten füttern
         string resultNames = "";
         string resultScores = "";
         int placeIndex = 1;
-        for (int i = highscoreManager.highscores.Length - 1; i >= 0; i--)
+        for (int i = highscoreHandler.highscores.Length - 1; i >= 0; i--)
         {
-            if (highscoreManager.highscores[i] != null)
+            if (highscoreHandler.highscores[i] != null)
             {
                 if (placeIndex == 1)
                 {
-                    string s = placeIndex.ToString() + "  : " + highscoreManager.highscores[i].playerName + "\n";
-                    resultNames += (highscoreManager.highscores[i] != null) ? s  : "n.a. \n";
+                    string s = placeIndex.ToString() + "  : " + highscoreHandler.highscores[i].playerName + "\n";
+                    resultNames += (highscoreHandler.highscores[i] != null) ? s  : "n.a. \n";
 
                 }
                 else {
-                    string s = placeIndex.ToString() + " : " + highscoreManager.highscores[i].playerName + "\n";
-                    resultNames += (highscoreManager.highscores[i] != null) ? s : "n.a. \n";
+                    string s = placeIndex.ToString() + " : " + highscoreHandler.highscores[i].playerName + "\n";
+                    resultNames += (highscoreHandler.highscores[i] != null) ? s : "n.a. \n";
                 }
-                resultScores += highscoreManager.highscores[i].score.ToString() + " \n";
+                resultScores += highscoreHandler.highscores[i].score.ToString() + " \n";
                 placeIndex++;
             }
         }
@@ -73,13 +65,13 @@ public class HighscoreBoardLoader : MonoBehaviour
     public void SubmitHighscore() //Übertrag des Namens und speicherung des Namens und Highscores in Datei
     {
         //Ist highscore wirklich ein neuer Highscore? DANN wird gespeichert
-        if (highscoreManager.isNewHighscore() )
+        if (highscoreHandler.isNewHighscore() )
         {
             //Wurde ein Name eingegeben?
             if (userInput.text != "" || userInput.text == null)
             {
                 //Highscore updaten und speichern
-                highscoreManager.SaveHighscores(userInput.text);
+                highscoreHandler.SaveHighscores(userInput.text);
                 inputContainer.SetActive(false);
                 highscoreBoard.SetActive(true);
             }

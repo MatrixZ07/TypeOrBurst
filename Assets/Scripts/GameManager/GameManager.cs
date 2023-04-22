@@ -1,20 +1,29 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SceneManagement;
 
+//TODO: GameManager als static class
 public class GameManager : MonoBehaviour
 {
+
+    private State _currentState;
+
+    public void SetState(State state)
+    {
+        _currentState= state;
+        StartCoroutine(_currentState.Start());
+    }
+
+    #region old implementation
     public WordManager wordManager;
     public PlayerManager playerManager;
-    public HighscoreManager highscoreManager;
+    public HighscoreHandler highscoreHandler;
 
     [SerializeField] private float gamespeed = 1;
     private bool gamepaused = true;
 
     public UIManager uiManager;
-    private HUDManager hudManager;
+    public HUDManager hudManager;
     private bool gamestarted;
 
     private void Awake()
@@ -25,16 +34,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
         FindObjectOfType<AudioManager>().Play("MenuSoundtrack");
-        uiManager = gameObject.GetComponent<UIManager>();
-        uiManager.ShowMainMenu(true);
+        if(SceneManager.GetActiveScene()==SceneManager.GetSceneByName("GameScene")) StartGame();
+        if (uiManager == null) return;
+        //uiManager = gameObject.GetComponent<UIManager>();
+        //uiManager.ShowMainMenu(true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //TODO: Auslagern in DevControls Klasse
         if (Input.GetKeyDown(KeyCode.F1))
         {
             gamespeed += 0.5f;
@@ -55,17 +66,14 @@ public class GameManager : MonoBehaviour
             }
         }
         if (Input.GetKeyUp(KeyCode.F4)) {
-            highscoreManager.DeleteHighscoreData();
+            highscoreHandler.DeleteHighscoreData();
         }
     }
 
     public void StartGame()
     {
-        //Wenn Szenen implementiert sind auskommentieren
-        //SceneManager.LoadScene("IngameScene");
-        
         //Das alles beim Laden der neuen Szene ausführen
-        highscoreManager.ResetHighscore();
+        CurrentScoreHandler.Reset();
         playerManager.RevivePlayer();
         wordManager.SetInputPossible(true);
         hudManager.ShowGameUI(true);
@@ -74,6 +82,10 @@ public class GameManager : MonoBehaviour
         gamestarted = true;
     }
 
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene(1);
+    }
     public void isPlayerDead(bool playerDead)
     {
         if (playerDead)
@@ -81,6 +93,8 @@ public class GameManager : MonoBehaviour
             EndGame();
         }
     }
+
+    //TODO: Lose-Condition in player implementieren. 
     public void EndGame() {
         Debug.Log("Trying to end game. in EndGame()");
         wordManager.SetInputPossible(false);
@@ -94,13 +108,15 @@ public class GameManager : MonoBehaviour
         hudManager.ShowGameOverScreen(true);
     }
 
+    //TODO: PauseGame in hudManager auslagern. 
     public void PauseGame() {
         if(gamestarted)
             hudManager.ShowPauseMenu(true);
         Debug.Log("GAME PAUSED.");
         Time.timeScale = 0;
-        gamepaused = true;
+        gamepaused = true; //TODO: GameState wechseln.
     }
+
     public void ResumeGame() {
         hudManager.ShowPauseMenu(false);
         Time.timeScale = 1;
@@ -110,4 +126,7 @@ public class GameManager : MonoBehaviour
     public void ExitApplication() {
         Application.Quit();
     }
+
+#endregion
 }
+

@@ -14,7 +14,7 @@ public class WordManager : MonoBehaviour
     public RandomEnemyType randomEnemyType;
     public WordListManager wordListManager;
     public WordSpawner wordSpawner;
-    public HighscoreManager highscore;
+    public CurrentScoreDisplay currentScoreDisplay;
 
     private bool inputPossible=false;
     private bool hasActiveWord;
@@ -34,13 +34,12 @@ public class WordManager : MonoBehaviour
 
     [SerializeField]
     private HUDManager hudManager;
-    
+
     public UIManager uiManager;
 
     private void Start()
     {
-        //AddCompound();
-        highscore = GameObject.FindGameObjectWithTag("HighscoreManager").GetComponent<HighscoreManager>();
+
     }
     // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX WAVEMANAGEMENT XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     /*WaveSpawn-Funktion : 
@@ -174,7 +173,7 @@ public class WordManager : MonoBehaviour
                 {
                     //Decrease Multiplier
                     FindObjectOfType<AudioManager>().Play("Mistyped");
-                    highscore.DecreaseMultiplier();
+                    MultiplierHandler.DecreaseMultiplier();
                     streak = 0;
 
                 }
@@ -185,7 +184,8 @@ public class WordManager : MonoBehaviour
                 {
                     FindObjectOfType<AudioManager>().Play("Mistyped");
                     streak = 0;
-                    highscore.DecreaseMultiplier();
+                    MultiplierHandler.DecreaseMultiplier();
+                    currentScoreDisplay.DisplayMultiplier();
                 }
             }
 
@@ -206,7 +206,8 @@ public class WordManager : MonoBehaviour
                 Debug.Log("ActiveWord reset");
                 if (streak >= streakCap)
                 {
-                    highscore.IncreaseMultiplier();
+                    MultiplierHandler.IncreaseMultiplier();
+                    currentScoreDisplay.DisplayMultiplier();
                     streak = 0;
                 }
                 else

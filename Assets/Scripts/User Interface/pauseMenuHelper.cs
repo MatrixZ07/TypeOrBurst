@@ -13,9 +13,9 @@ public class pauseMenuHelper : MonoBehaviour
     public void ResumeGame() {
         gameManager.ResumeGame();
     }
-    public void ShowMainMenu() {
-        gameManager.uiManager.ShowMainMenu(true);
-    }
+    //public void ShowMainMenu() {
+    //    gameManager.uiManager.ShowMainMenu(true);
+    //}
     public void EndGame()
     {
         gameManager.EndGame();

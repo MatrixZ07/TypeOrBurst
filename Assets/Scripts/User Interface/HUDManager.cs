@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-
+/*used to display on screen menus
+ */
 public class HUDManager : MonoBehaviour
 {
     private GameObject[] gameUIElements;
@@ -20,13 +21,17 @@ public class HUDManager : MonoBehaviour
     public GameObject gameoverScreen;
     public GameObject highscoreContainer;
     public GameObject highscoreContainerPrefab;
-    public HighscoreManager highscoreManager;
+    public HighscoreHandler highscoreHandler;
     public TextMeshProUGUI gameoverHeadline;
 
     private void Awake()
     {
         gameUIElements = GameObject.FindGameObjectsWithTag("GameUI");
         waveDisplay.gameObject.SetActive(false);
+    }
+    private void Start()
+    {
+        ShowGameUI(true);
     }
 
     // Update is called once per frame
@@ -51,7 +56,6 @@ public class HUDManager : MonoBehaviour
             foreach (GameObject uielement in gameUIElements)
             {
                 uielement.SetActive(false);
-
             }
 
         }
@@ -108,7 +112,7 @@ public class HUDManager : MonoBehaviour
                 highscoreContainer = Instantiate(highscoreContainerPrefab,
                     highscoreContainerPrefab.transform.localPosition, Quaternion.identity,
                     gameoverScreen.transform) as GameObject;
-            if (highscoreManager.isNewHighscore())
+            if (highscoreHandler.isNewHighscore())
             {
                 gameoverHeadline.text = "New Highscore";
                 //Zeige InputContainer. �ber InputContainer's Submit wird dann highscoreBoard angezeigt.

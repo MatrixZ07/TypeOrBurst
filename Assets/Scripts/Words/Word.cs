@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class Word
 {
-    public HighscoreManager highscore;
+    CurrentScoreDisplay currentScoreDisplay;
     public string word;
 
     //für Tank
@@ -39,8 +41,7 @@ public class Word
 
     //Konstruktor für TANK-Word
     public Word(string[] _word, WordDisplay _display) {
-        highscore = GameObject.FindGameObjectWithTag("HighscoreManager").GetComponent<HighscoreManager>();
-
+        currentScoreDisplay = GameObject.FindGameObjectWithTag("CurrentScoreDisplay").GetComponent<CurrentScoreDisplay>();
         wordArray = _word;
         word = wordArray[0];
         //Wortpunktzahl = Wortlänge*10*Wortlängen-Multiplikator
@@ -79,7 +80,8 @@ public class Word
         if (wordTyped)
         {
             typeIndex = 0;
-            highscore.Add(value);
+            CurrentScoreHandler.AddToScore(value);
+            currentScoreDisplay.DisplayScore();
         }
         return wordTyped;
     }
