@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System;
 //Diese Klasse kümmert sich um Highscores.
 public class HighscoreHandler : MonoBehaviour
 {
-    public HighscoreEntry[] highscores;
+    public List<HighscoreEntry> highscores;
     private string HIGHSCORE_DATA_PATH;
     public bool HighscoreSaved { get; private set; }
-    private void Start()
+    private void Awake()
     {
         HIGHSCORE_DATA_PATH = Application.persistentDataPath + "/highscores.json";
         LoadHighscores();
@@ -18,7 +20,7 @@ public class HighscoreHandler : MonoBehaviour
     { //Update der HighscoreEinträge mit dem neuen Highscore ( Called in SaveHighscores())
         HighscoreEntry newvalue = new HighscoreEntry(highscore, playerName);
         HighscoreEntry _temp;
-        for (int i = highscores.Length - 1; i >= 0; i--)
+        for (int i = highscores.Count - 1; i >= 0; i--)
         {
             if (highscores[i] == null)
             {
@@ -52,74 +54,56 @@ public class HighscoreHandler : MonoBehaviour
         }
         return false;
     }
-    public void LoadHighscores()
-    { //Laden der Highscores aus der JSON datei
-        try
+	//Laden der Highscores aus der JSON datei
+	public void LoadHighscores()
+    {
+        Debug.Log("LoadHighscores executed.");
+        if (!File.Exists(HIGHSCORE_DATA_PATH))
         {
-            if (!File.Exists(HIGHSCORE_DATA_PATH))
-            {
-                SetDefaultHighscores();
-            }
-            HighscoreData data = JsonConvert.DeserializeObject<HighscoreData>(File.ReadAllText(HIGHSCORE_DATA_PATH));
-            for (int i = 0; i < highscores.Length; i++)
-            {
-                highscores[i] = data.entries[i];
-            }
+            SetDefaultHighscores();
         }
-        //catch (FileNotFoundException e)
-        //{
-        //    FileNotFoundExceptions are handled here.
-        //    if (e.Source != null)
-        //        Debug.Log(e.Message);
-        //}
-        catch (IOException e)
-        {
-            // Extract some information from this exception, and then
-            // throw it to the parent method.
-            if (e.Source != null)
-                Debug.Log(e.Message);
-            throw;
-        }
-
+        HighscoreData data = JsonConvert.DeserializeObject<HighscoreData>(File.ReadAllText(HIGHSCORE_DATA_PATH));
+        highscores = data.entries;
     }
     public void DeleteHighscoreData()
     {
-        foreach (HighscoreEntry entry in highscores)
-        {
-            entry.playerName = "n.a";
-            entry.score = 0;
-        }
         HighscoreData data = new HighscoreData();
-        data.entries = highscores;
-        string jsonData = JsonConvert.SerializeObject(data);
+        highscores = data.entries;
+		string jsonData = JsonConvert.SerializeObject(data);
         File.WriteAllText(HIGHSCORE_DATA_PATH, jsonData);
         //LoadHighscores();
     }
     public void SetDefaultHighscores()
     {
-        HighscoreEntry[] defaultHighscoreEntries =
-        {
-            new HighscoreEntry(0,"Nobody"),
-            new HighscoreEntry(0,"Nobody"),
-            new HighscoreEntry(0,"Nobody"),
-            new HighscoreEntry(0,"Nobody"),
-            new HighscoreEntry(0,"Nobody"),
-        };
-        highscores = defaultHighscoreEntries;
-        HighscoreData defaultData = new HighscoreData();
-        defaultData.entries = defaultHighscoreEntries;
+        HighscoreData defaultData = new HighscoreData(new HighscoreEntry(), new HighscoreEntry(), new HighscoreEntry(), new HighscoreEntry(), new HighscoreEntry());
+        highscores = defaultData.entries;
         string jsonData = JsonConvert.SerializeObject(defaultData);
         File.WriteAllText(HIGHSCORE_DATA_PATH, jsonData);
-        LoadHighscores();
     }
     
 }
 
 //Hilfsklasse, die HighscoreEntry-s in JSON speichert.
 [System.Serializable]
-public class HighscoreData 
+public class HighscoreData
 {
-    public HighscoreEntry[] entries = new HighscoreEntry[5];
+    public List<HighscoreEntry> entries = new List<HighscoreEntry>();
+
+    public HighscoreData() { 
+        
+    }
+    public HighscoreData(HighscoreEntry entry1 = null, 
+                         HighscoreEntry entry2 = null, 
+                         HighscoreEntry entry3 = null, 
+                         HighscoreEntry entry4 = null, 
+                         HighscoreEntry entry5 = null) {
+        entries.Add(entry1);
+		entries.Add(entry2);
+		entries.Add(entry3);
+		entries.Add(entry4);
+		entries.Add(entry5);
+	}
+
 }
 
 //Hilfsklasse zur Speicherung von Highscores
@@ -129,7 +113,7 @@ public class HighscoreEntry
     public int score;
     public string playerName;
 
-    public HighscoreEntry(int s, string p)
+    public HighscoreEntry(int s = 0, string p = "DefaultBot")
     {
         score = s;
         playerName = p;

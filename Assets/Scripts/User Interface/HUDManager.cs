@@ -116,12 +116,12 @@ public class HUDManager : MonoBehaviour
             {
                 gameoverHeadline.text = "New Highscore";
                 //Zeige InputContainer. �ber InputContainer's Submit wird dann highscoreBoard angezeigt.
-                highscoreContainer.GetComponent<HighscoreBoardLoader>().ShowInputContainer(true);
+                highscoreContainer.GetComponent<HighscoreInputBoardLoader>().ShowInputContainer(true);
             }
             else
             {
                 gameoverHeadline.text = "Game Over";
-                highscoreContainer.GetComponent<HighscoreBoardLoader>().ShowInputContainer(false);
+                highscoreContainer.GetComponent<HighscoreInputBoardLoader>().ShowInputContainer(false);
             }
         }
         else
