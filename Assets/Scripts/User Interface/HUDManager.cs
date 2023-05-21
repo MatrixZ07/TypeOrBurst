@@ -11,7 +11,8 @@ public class HUDManager : MonoBehaviour
     private GameObject[] gameUIElements;
     
     public TextMeshProUGUI waveDisplay;
-    public bool showWaveDisplay = false;
+    [SerializeField]
+    private bool showWaveDisplay = false;
     
     //PauseMenu
     public GameObject pauseMenu;
@@ -19,8 +20,7 @@ public class HUDManager : MonoBehaviour
 
     //GameOverScreen
     public GameObject gameoverScreen;
-    public GameObject highscoreContainer;
-    public GameObject highscoreContainerPrefab;
+    public GameObject highscoreInputBoard;
     public HighscoreHandler highscoreHandler;
     public TextMeshProUGUI gameoverHeadline;
 
@@ -67,23 +67,22 @@ public class HUDManager : MonoBehaviour
         showWaveDisplay = true;
     }
     
+
     private void MoveWaveDisplay()
     {
-        if (waveDisplay != null && showWaveDisplay == true)
+        if (!waveDisplay.gameObject.activeInHierarchy)
         {
-            if (waveDisplay.gameObject.activeInHierarchy)
-            {
-                if (waveDisplay.transform.localPosition.y > 0)
-                {
-                    waveDisplay.transform.localPosition -= new Vector3(0f, 30f * Time.deltaTime, 0f);
-                }
-                else
-                {
-                    waveDisplay.gameObject.SetActive(false);
-                    showWaveDisplay = false;
-                    waveDisplay.transform.localPosition = new Vector3(0f, 30f, 0f);
-                }
-            }
+            return;
+        }
+        if (waveDisplay.transform.localPosition.y > 0)
+        {
+            waveDisplay.transform.localPosition -= new Vector3(0f, 30f * Time.deltaTime, 0f);
+        }
+        else
+        {
+            waveDisplay.gameObject.SetActive(false);
+            showWaveDisplay = false;
+            waveDisplay.transform.localPosition = new Vector3(0f, 30f, 0f);
         }
     }
     
@@ -103,31 +102,12 @@ public class HUDManager : MonoBehaviour
 
     
     
-    public void ShowGameOverScreen(bool show) { //POST GAME ANZEIGE (GameOver/NewHighscore)
+    public void ShowGameOverScreen(bool show) //POST GAME ANZEIGE (GameOver/NewHighscore)
+    { 
+        gameoverScreen.SetActive(show);
+        highscoreInputBoard.SetActive(show);
 
-        if (show)
-        {
-            gameoverScreen.SetActive(true);
-            if(gameoverScreen!=null)
-                highscoreContainer = Instantiate(highscoreContainerPrefab,
-                    highscoreContainerPrefab.transform.localPosition, Quaternion.identity,
-                    gameoverScreen.transform) as GameObject;
-            if (highscoreHandler.isNewHighscore())
-            {
-                gameoverHeadline.text = "New Highscore";
-                //Zeige InputContainer. �ber InputContainer's Submit wird dann highscoreBoard angezeigt.
-                highscoreContainer.GetComponent<HighscoreInputBoardLoader>().ShowInputContainer(true);
-            }
-            else
-            {
-                gameoverHeadline.text = "Game Over";
-                highscoreContainer.GetComponent<HighscoreInputBoardLoader>().ShowInputContainer(false);
-            }
-        }
-        else
-        {
-            gameoverScreen.SetActive(false);
-            Destroy(highscoreContainer);
-        }
+        gameoverHeadline.text = (highscoreHandler.isNewHighscore()) ? "New Highscore" : "Game Over";
+        highscoreInputBoard.GetComponent<HighscoreInputBoardLoader>().ShowInputContainer(highscoreHandler.isNewHighscore());
     }
 }

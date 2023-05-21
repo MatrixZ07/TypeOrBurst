@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public HUDManager hudManager;
     private bool gamestarted;
 
+    public enum SCENENAME { GameScene, MenuScene}
+
     private void Awake()
     {
         PauseGame();

@@ -22,7 +22,7 @@ public class ButtonSelectorScript : MonoBehaviour
     {
         if (buttonSelector != null) { 
             if (buttonSelector.activeInHierarchy && moveToPos) {
-                if (buttonSelector.transform.localPosition.y > activeTargetpos.localPosition.y)
+                if (buttonSelector.transform.localPosition.y > activeTargetpos.localPosition.y + 0.01f)
                 {
                     buttonSelector.transform.localPosition = Vector3.Lerp(buttonSelector.transform.localPosition, activeTargetpos.localPosition, Time.unscaledDeltaTime * lerpspeed);
                 }
@@ -39,7 +39,6 @@ public class ButtonSelectorScript : MonoBehaviour
         PlayUIHover();
         buttonSelector.SetActive(true);
         activeTargetpos = transform;
-        //Debug.Log(activeTargetpos.localPosition.y.ToString() + " of gameobject" + transform.name);
         Vector3 startPosition = new Vector3(activeTargetpos.localPosition.x, activeTargetpos.localPosition.y + 10f, activeTargetpos.localPosition.z);
         buttonSelector.transform.localPosition = startPosition;
         moveToPos = true;

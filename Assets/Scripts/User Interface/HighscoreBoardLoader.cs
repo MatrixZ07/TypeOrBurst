@@ -10,7 +10,6 @@ public class HighscoreBoardLoader : MonoBehaviour
     public TextMeshProUGUI highscoresNames;
     public TextMeshProUGUI highscoresScores;
 
-    public GameObject highscoreBoard;
 	private void Start()
 	{
 		DisplayHighscores();

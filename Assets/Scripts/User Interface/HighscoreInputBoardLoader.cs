@@ -10,16 +10,17 @@ public class HighscoreInputBoardLoader : HighscoreBoardLoader
     public TMP_InputField userInput;
 
     public GameObject inputContainer;
+	public GameObject highscoresContainer;
 
-    public void ShowInputContainer(bool show) {
+	public void ShowInputContainer(bool show) {
         if (show)
         {
             inputContainer.SetActive(true);
-            highscoreBoard.SetActive(false);
+            highscoresContainer.SetActive(false);
         }
         else {
             inputContainer.SetActive(false);
-            highscoreBoard.SetActive(true);
+            highscoresContainer.SetActive(true);
             DisplayHighscores();
         }
     }
@@ -35,7 +36,7 @@ public class HighscoreInputBoardLoader : HighscoreBoardLoader
                 //Highscore updaten und speichern
                 highscoreHandler.SaveHighscores(userInput.text);
                 inputContainer.SetActive(false);
-                highscoreBoard.SetActive(true);
+                highscoresContainer.SetActive(true);
             }
             else
             {
