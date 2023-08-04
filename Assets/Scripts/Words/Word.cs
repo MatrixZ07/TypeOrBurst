@@ -81,7 +81,6 @@ public class Word
         {
             typeIndex = 0;
             CurrentScoreHandler.AddToScore(value);
-            currentScoreDisplay.DisplayScore();
         }
         return wordTyped;
     }

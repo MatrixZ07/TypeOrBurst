@@ -175,7 +175,6 @@ public class WordManager : MonoBehaviour
                     FindObjectOfType<AudioManager>().Play("Mistyped");
                     MultiplierHandler.DecreaseMultiplier();
                     streak = 0;
-
                 }
             }
             else
@@ -183,10 +182,9 @@ public class WordManager : MonoBehaviour
                 if (!WordWithLetterFound(letter))
                 {
                     FindObjectOfType<AudioManager>().Play("Mistyped");
-                    streak = 0;
                     MultiplierHandler.DecreaseMultiplier();
-                    currentScoreDisplay.DisplayMultiplier();
-                }
+					streak = 0;
+				}
             }
 
             if (hasActiveWord && activeWord.WordTyped()) //setzt aktiveWord false
@@ -207,7 +205,6 @@ public class WordManager : MonoBehaviour
                 if (streak >= streakCap)
                 {
                     MultiplierHandler.IncreaseMultiplier();
-                    currentScoreDisplay.DisplayMultiplier();
                     streak = 0;
                 }
                 else

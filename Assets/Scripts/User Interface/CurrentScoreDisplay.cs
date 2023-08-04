@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.ComponentModel;
 
 public class CurrentScoreDisplay : MonoBehaviour
 {
@@ -10,17 +11,19 @@ public class CurrentScoreDisplay : MonoBehaviour
     {
         CurrentScoreHandler.Reset();
         MultiplierHandler.Reset();
-        DisplayScore();
-        DisplayMultiplier();
+        CurrentScoreHandler.OnScoreChanged += DisplayScore;
+        MultiplierHandler.OnMultiplierChanged += DisplayMultiplier;
+        //DisplayScore();
+        //DisplayMultiplier();
     }
 
     //TODO: Anzeigen von Punkten und Multiplier handlen. 
-    public void DisplayScore()
+    public void DisplayScore(int newScore)
     {
-        currentScoreText.text = CurrentScoreHandler.CurrentScore.ToString();
+        currentScoreText.text = newScore.ToString();
     }
 
-    public void DisplayMultiplier() { //Setzt Multiplier in GameUI
+    public void DisplayMultiplier(int newMultiplier) { 
         multiplierText.text = MultiplierHandler.Multiplier.ToString() + "x";
     }
 
