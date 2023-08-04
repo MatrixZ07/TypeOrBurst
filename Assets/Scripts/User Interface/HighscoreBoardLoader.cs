@@ -8,7 +8,7 @@ public class HighscoreBoardLoader : MonoBehaviour
     public HighscoreHandler highscoreHandler;
 
     public TextMeshProUGUI highscoresNames;
-    public TextMeshProUGUI highscoresScores;
+	public TextMeshProUGUI highscoresScores;
 
 	private void Start()
 	{

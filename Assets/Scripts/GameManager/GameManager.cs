@@ -38,7 +38,8 @@ public class GameManager : MonoBehaviour
     {
         playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
         FindObjectOfType<AudioManager>().Play("MenuSoundtrack");
-        if(SceneManager.GetActiveScene()==SceneManager.GetSceneByName("GameScene")) StartGame();
+        if(SceneManager.GetActiveScene()==SceneManager.GetSceneByName("GameScene")) 
+            StartGame();
         if (uiManager == null) return;
         //uiManager = gameObject.GetComponent<UIManager>();
         //uiManager.ShowMainMenu(true);
@@ -88,7 +89,11 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-    public void isPlayerDead(bool playerDead)
+	public void LoadMainMenuScene()
+	{
+		SceneManager.LoadScene(0);
+	}
+	public void isPlayerDead(bool playerDead)
     {
         if (playerDead)
         {

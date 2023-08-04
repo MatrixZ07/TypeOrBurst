@@ -12,11 +12,14 @@ public class ButtonSelectorScript : MonoBehaviour
     static Transform activeTargetpos;
 
     AudioManager audioManager;
-    // Start is called before the first frame update
-    void Start()
+	private void Awake()
+	{
+		audioManager = GameObject.FindObjectOfType<AudioManager>();
+	}
+	// Start is called before the first frame update
+	void Start()
     {
         buttonSelector.SetActive(false);
-        audioManager = GameObject.FindObjectOfType<AudioManager>();
     }
     private void Update()
     {
@@ -31,6 +34,9 @@ public class ButtonSelectorScript : MonoBehaviour
                     moveToPos = false;
                 }
             }
+        } else
+        {
+
         }
         
         
@@ -52,7 +58,10 @@ public class ButtonSelectorScript : MonoBehaviour
 
     public void PlayClickSound() {
         audioManager.Play("UIClick");
-        buttonSelector.SetActive(false);
-    }
+        if(buttonSelector != null)
+        {
+			buttonSelector.SetActive(false);
+		}
+	}
 
 }

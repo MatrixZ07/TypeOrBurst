@@ -779,7 +779,6 @@ MonoBehaviour:
   highscoreHandler: {fileID: 1386179709578956784}
   highscoresNames: {fileID: 4457827207548183069}
   highscoresScores: {fileID: 4457827208586325737}
-  highscoreBoard: {fileID: 4457827209537718443}
 --- !u!114 &1386179709578956784
 MonoBehaviour:
   m_ObjectHideFlags: 0
