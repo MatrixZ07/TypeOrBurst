@@ -20,7 +20,9 @@ public class SettingsMenu : MonoBehaviour
     {
         if(savedText!=null)
             savedText.gameObject.SetActive(false);
-    }
+        LoadPlayerPrefs();
+
+	}
 
     public void SetVolume(float volume) {
         audioMixer.SetFloat("MasterVolume",Mathf.Log10(volume)*20);
@@ -28,7 +30,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public IEnumerator DisplaySaveText() //displayed save text im Settingsmen�
+    public IEnumerator DisplaySaveText() //displayed save text im Settingsmenue
     {
         savedText.gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(3f);
@@ -48,6 +50,8 @@ public class SettingsMenu : MonoBehaviour
         if (!PlayerPrefs.HasKey("MasterVolume"))
         {
             Debug.Log("No MasterVolume saved in PlayerPrefs");
+            audioMixer.SetFloat("MasterVolume", Mathf.Log10(myDefaultVolume) * 20);
+            slider.value = myDefaultVolume;
         }
         else
         {
@@ -84,4 +88,6 @@ public class SettingsMenu : MonoBehaviour
         if(PlayerPrefs.GetInt("UseCustomWordList")==1)
             toggle.SetIsOnWithoutNotify(true);
     }
+
+    private float myDefaultVolume = 0.5f;
 }

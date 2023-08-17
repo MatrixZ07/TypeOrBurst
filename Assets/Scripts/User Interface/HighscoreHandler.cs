@@ -2,10 +2,9 @@
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System;
-//Diese Klasse kümmert sich um Highscores.
 public class HighscoreHandler : MonoBehaviour
 {
+
     public List<HighscoreEntry> highscores;
     private string HIGHSCORE_DATA_PATH;
     public bool HighscoreSaved { get; private set; }
@@ -14,7 +13,6 @@ public class HighscoreHandler : MonoBehaviour
         HIGHSCORE_DATA_PATH = Application.persistentDataPath + "/highscores.json";
         LoadHighscores();
     }
-
     
     public void UpdateHighscores(int highscore, string playerName)
     { //Update der HighscoreEinträge mit dem neuen Highscore ( Called in SaveHighscores())

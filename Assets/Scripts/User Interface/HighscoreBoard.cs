@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class HighscoreBoardLoader : MonoBehaviour
+public class HighscoreBoard : MonoBehaviour
 {
     public HighscoreHandler highscoreHandler;
 
@@ -12,12 +12,10 @@ public class HighscoreBoardLoader : MonoBehaviour
 
 	private void Start()
 	{
-		DisplayHighscores();
+		UpdateDisplay();
 	}
-	public void DisplayHighscores() //Reine Anzeige der Highscores im UI
+	public void UpdateDisplay()
     {
-		Debug.Log("DisplayHighscores executed.");
-		//Anzeige mit neuen Daten füttern
 		string resultNames = "";
         string resultScores = "";
         for (int i = highscoreHandler.highscores.Count - 1; i >= 0; i--)
@@ -34,15 +32,6 @@ public class HighscoreBoardLoader : MonoBehaviour
         }
         highscoresNames.text = resultNames;
         highscoresScores.text = resultScores;
-    }
-
-    public void PlayClick()
-    {
-        FindObjectOfType<AudioManager>().Play("UIClick");
-    }
-
-    public void PlayHoverUI()
-    {
-        FindObjectOfType<AudioManager>().Play("UIHover");
-    }
+		Debug.Log("HighscoreBoard.UpdateDisplay() executed. Highscores displayed on HighscoreBoard.");
+	}
 }

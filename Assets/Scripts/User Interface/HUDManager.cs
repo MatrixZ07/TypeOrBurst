@@ -108,6 +108,6 @@ public class HUDManager : MonoBehaviour
         highscoreInputBoard.SetActive(show);
 
         gameoverHeadline.text = (highscoreHandler.isNewHighscore()) ? "New Highscore" : "Game Over";
-        highscoreInputBoard.GetComponent<HighscoreInputBoardLoader>().ShowInputContainer(highscoreHandler.isNewHighscore());
+        highscoreInputBoard.GetComponent<HighscoreInputBoard>().ShowInputContainer(highscoreHandler.isNewHighscore());
     }
 }

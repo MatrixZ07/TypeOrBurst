@@ -131,8 +131,8 @@ public sealed class UIManager : MonoBehaviour
     //            localPosition = new Vector3(localPosition.x,
     //                localPosition.y - 50f, localPosition.z);
     //            highscoresMenuBoard.transform.localPosition = localPosition;
-    //            highscoresMenuBoard.GetComponent<HighscoreBoardLoader>()
-    //                .ShowInputContainer(false); //�ber ShowInputContainer(false) wird auch DisplayHighscores() aufgerufen und die Anzeige mit den Highscores gef�ttert.
+    //            highscoresMenuBoard.GetComponent<HighscoreBoard>()
+    //                .ShowInputContainer(false); //�ber ShowInputContainer(false) wird auch UpdateDisplay() aufgerufen und die Anzeige mit den Highscores gef�ttert.
     //        }
     //    }
     //    else

@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class HighscoreInputBoardLoader : MonoBehaviour
+public class HighscoreInputBoard : MonoBehaviour
 {
     
     public TextMeshProUGUI yourScore;
     public TMP_InputField userInput;
 
     public GameObject inputContainer;
-	public HighscoreBoardLoader highscoresContainer;
+	public HighscoreBoard highscoresContainer;
+	public HighscoreHandler highscoreHandler;
 
-    //Rename. Macht zwei verschiedene Sachen. Name nicht aussagekräftig.
+	//Rename. Macht zwei verschiedene Sachen. Name nicht aussagekräftig.
 	public void ShowInputContainer(bool show) {
         if (show)
         {
@@ -23,22 +24,19 @@ public class HighscoreInputBoardLoader : MonoBehaviour
         else {
             inputContainer.SetActive(false);
             highscoresContainer.gameObject.SetActive(true);
-            highscoresContainer.DisplayHighscores();
+            highscoresContainer.UpdateDisplay();
         }
     }
 
-    public void SubmitHighscore() //Übertrag des Namens und speicherung des Namens und Highscores in Datei
+    public void SubmitHighscore() 
     {
-        //Ist highscore wirklich ein neuer Highscore? DANN wird gespeichert
-        //necessary when Submit button is only displayed when Highscore is reached?
-        if (highscoresContainer.highscoreHandler.isNewHighscore() )
+        if (highscoreHandler.isNewHighscore() ) //TODO: Rework access to HighscoreHandler
         {
-            //Wurde ein Name eingegeben?
             if (userInput.text != "")
             {
-                //Highscore updaten und speichern
-                highscoresContainer.highscoreHandler.SaveHighscores(userInput.text);
+                highscoreHandler.SaveHighscores(userInput.text);
                 inputContainer.SetActive(false);
+                highscoresContainer.UpdateDisplay();
                 highscoresContainer.gameObject.SetActive(true);
             }
             else
