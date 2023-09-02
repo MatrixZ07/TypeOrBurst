@@ -8,10 +8,12 @@ public class PlayerManager : MonoBehaviour
     public GameManager gameManager;
     public SpriteRenderer playerSprite;
    
-    private int health = 100;
-    int hitCount=0;
+    private static int health = 100;
+    public static int Health { get => health; }
+	public static bool IsPlayerDead { get => (Health <= 0) ? true : false; }
+	int hitCount=0;
 
-    //Referenz auf Highscore um an isPlayerDead Aufruf zu senden, ob Highscore erreicht.
+    //Referenz auf Highscore um an IsPlayerDead Aufruf zu senden, ob Highscore erreicht.
 
     // Start is called before the first frame update
     void Awake()
@@ -25,12 +27,6 @@ public class PlayerManager : MonoBehaviour
         RevivePlayer();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision detected. Trying to increase hitcount");
@@ -40,13 +36,13 @@ public class PlayerManager : MonoBehaviour
         int damage= collision.gameObject.GetComponent<EnemyManager>().damage;
         TakeDamage(damage);
         //Lebt Spieler noch?
-        gameManager.isPlayerDead(PlayerDead());
+        gameManager.IsPlayerDead(IsPlayerDead);
         //Spiele Healthbar-Animation
     }
     private void TakeDamage(int damage) {
         health -= damage;
         healthbar.SetHealth(health);
-        if (PlayerDead())
+        if (IsPlayerDead)
         {
             playerSprite.enabled = false;
             GetComponent<ParticleSystem>().Play();
@@ -60,15 +56,16 @@ public class PlayerManager : MonoBehaviour
     }
     public bool PlayerDead()
     {
+        
         if (health <= 0)
         {
             return true;
         }
         else {
             return false;
-        }
-        
+        } 
     }
+    
     public void RevivePlayer() {
         hitCount = 0;
         health = 100;
@@ -80,8 +77,5 @@ public class PlayerManager : MonoBehaviour
         catch (MissingComponentException e) {
             Debug.Log(e);
         }
-    }
-    public int GetHealth() {
-        return health;
     }
 }

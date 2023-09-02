@@ -1415,6 +1415,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3902872937661960625, guid: 46760295452b01d4fa03859812b4a4c1, type: 3}
+      propertyPath: highscoreHandler
+      value: 
+      objectReference: {fileID: 278640858}
     - target: {fileID: 4519053701011270516, guid: 46760295452b01d4fa03859812b4a4c1, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class pauseMenuHelper : MonoBehaviour
 {
-    GameManager gameManager;
-    // Start is called before the first frame update
+    HUDManager hudManager;
+
     private void Awake()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        hudManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<HUDManager>();
     }
     public void ResumeGame() {
-        gameManager.ResumeGame();
+		hudManager.ResumeGame();
     }
     public void ShowMainMenu()
     {
-        gameManager.LoadMainMenuScene();
+        GameManager.LoadMainMenuScene();
     }
 }

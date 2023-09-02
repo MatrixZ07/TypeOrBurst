@@ -37,7 +37,18 @@ public class HUDManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveWaveDisplay();
+		if (Input.GetKeyUp(KeyCode.Escape))
+		{
+			if (gamepaused)
+			{
+				ResumeGame();
+			}
+			else
+			{
+				PauseGame();
+			}
+		}
+		MoveWaveDisplay();
     }
     
     //InGame-HUD
@@ -97,12 +108,29 @@ public class HUDManager : MonoBehaviour
             Destroy(pauseMenuInstance);
         }
     }
-    
-    
 
-    
-    
-    public void ShowGameOverScreen(bool show) //POST GAME ANZEIGE (GameOver/NewHighscore)
+	public void ResumeGame()
+	{
+		ShowPauseMenu(false);
+		Time.timeScale = 1;
+		gamepaused = false;
+	}
+
+	public void PauseGame()
+	{
+		if (!GameManager.GameStarted) return;
+
+		ShowPauseMenu(true);
+
+		Time.timeScale = 0;
+		gamepaused = true;
+		Debug.Log("GAME PAUSED.");
+		//TODO: GameState wechseln.
+	}
+
+
+
+	public void ShowGameOverScreen(bool show) //POST GAME ANZEIGE (GameOver/NewHighscore)
     { 
         gameoverScreen.SetActive(show);
         highscoreInputBoard.SetActive(show);
@@ -110,4 +138,6 @@ public class HUDManager : MonoBehaviour
         gameoverHeadline.text = (highscoreHandler.isNewHighscore()) ? "New Highscore" : "Game Over";
         highscoreInputBoard.GetComponent<HighscoreInputBoard>().ShowInputContainer(highscoreHandler.isNewHighscore());
     }
+
+	private bool gamepaused = true;
 }

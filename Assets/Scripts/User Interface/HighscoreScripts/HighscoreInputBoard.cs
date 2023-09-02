@@ -10,7 +10,7 @@ public class HighscoreInputBoard : MonoBehaviour
     public TMP_InputField userInput;
 
     public GameObject inputContainer;
-	public HighscoreBoard highscoresContainer;
+	public HighscoreBoard highscoresBoard;
 	public HighscoreHandler highscoreHandler;
 
 	//Rename. Macht zwei verschiedene Sachen. Name nicht aussagekräftig.
@@ -18,14 +18,15 @@ public class HighscoreInputBoard : MonoBehaviour
         if (show)
         {
             inputContainer.SetActive(true);
-            highscoresContainer.gameObject.SetActive(false);
+            highscoresBoard.gameObject.SetActive(false);
             yourScore.text = CurrentScoreHandler.CurrentScore.ToString();
         }
         else {
             inputContainer.SetActive(false);
-            highscoresContainer.gameObject.SetActive(true);
-            highscoresContainer.UpdateDisplay();
-        }
+            highscoresBoard.gameObject.SetActive(true);
+            highscoresBoard.UpdateDisplay();
+			yourScore.text = CurrentScoreHandler.CurrentScore.ToString();
+		}
     }
 
     public void SubmitHighscore() 
@@ -36,9 +37,9 @@ public class HighscoreInputBoard : MonoBehaviour
             {
                 highscoreHandler.SaveHighscores(userInput.text);
                 inputContainer.SetActive(false);
-                highscoresContainer.UpdateDisplay();
-                highscoresContainer.gameObject.SetActive(true);
-            }
+                highscoresBoard.gameObject.SetActive(true);
+				highscoresBoard.UpdateDisplay();
+			}
             else
             {
                 Debug.Log("No username Input registered - Highscore not saved, try again");

@@ -43,7 +43,7 @@ public class WordManager : MonoBehaviour
     }
     // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX WAVEMANAGEMENT XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     /*WaveSpawn-Funktion : 
-     * Jede Welle kommen 10 extra W�rter hinzu. 
+     * Jede Welle kommen 10 extra W�rter hinzu.
      * Gegnertypen werden alle n Wellen hinzugef�gt.
      * Streak wird in Welle 1 zur�ckgesetzt, sonst beibehalten
      * verbleibende Enemies werden jede Welle gesetzt.
@@ -88,7 +88,7 @@ public class WordManager : MonoBehaviour
     }
     public void StopWave()
     {
-        RestoreDefaultValues();
+        Reset();
         StopCoroutine(waveSpawn);
         wavefinished = true;
     }
@@ -272,7 +272,7 @@ public class WordManager : MonoBehaviour
         }
     }
 
-    private void RestoreDefaultValues() {
+    private void Reset() {
         fiveToGo = 0;
         streak = 0;
         spawncount = 10;

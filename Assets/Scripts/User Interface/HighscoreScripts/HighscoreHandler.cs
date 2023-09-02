@@ -8,13 +8,14 @@ public class HighscoreHandler : MonoBehaviour
     public List<HighscoreEntry> highscores;
     private string HIGHSCORE_DATA_PATH;
     public bool HighscoreSaved { get; private set; }
-    private void Awake()
-    {
-        HIGHSCORE_DATA_PATH = Application.persistentDataPath + "/highscores.json";
+
+	private void Awake()
+	{
+		HIGHSCORE_DATA_PATH = Application.persistentDataPath + "/highscores.json";
         LoadHighscores();
-    }
-    
-    public void UpdateHighscores(int highscore, string playerName)
+	}
+
+	public void UpdateHighscores(int highscore, string playerName)
     { //Update der HighscoreEinträge mit dem neuen Highscore ( Called in SaveHighscores())
         HighscoreEntry newvalue = new HighscoreEntry(highscore, playerName);
         HighscoreEntry _temp;
@@ -55,7 +56,6 @@ public class HighscoreHandler : MonoBehaviour
 	//Laden der Highscores aus der JSON datei
 	public void LoadHighscores()
     {
-        Debug.Log("LoadHighscores executed.");
         if (!File.Exists(HIGHSCORE_DATA_PATH))
         {
             SetDefaultHighscores();
@@ -78,42 +78,5 @@ public class HighscoreHandler : MonoBehaviour
         string jsonData = JsonConvert.SerializeObject(defaultData);
         File.WriteAllText(HIGHSCORE_DATA_PATH, jsonData);
     }
-    
-}
 
-//Hilfsklasse, die HighscoreEntry-s in JSON speichert.
-[System.Serializable]
-public class HighscoreData
-{
-    public List<HighscoreEntry> entries = new List<HighscoreEntry>();
-
-    public HighscoreData() { 
-        
-    }
-    public HighscoreData(HighscoreEntry entry1 = null, 
-                         HighscoreEntry entry2 = null, 
-                         HighscoreEntry entry3 = null, 
-                         HighscoreEntry entry4 = null, 
-                         HighscoreEntry entry5 = null) {
-        entries.Add(entry1);
-		entries.Add(entry2);
-		entries.Add(entry3);
-		entries.Add(entry4);
-		entries.Add(entry5);
-	}
-
-}
-
-//Hilfsklasse zur Speicherung von Highscores
-[System.Serializable]
-public class HighscoreEntry
-{ 
-    public int score;
-    public string playerName;
-
-    public HighscoreEntry(int s = 0, string p = "DefaultBot")
-    {
-        score = s;
-        playerName = p;
-    }
 }

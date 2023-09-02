@@ -1,0 +1,5 @@
+E:\Unity Projects\AStoryYouWrote\InputManager.Test\obj\Debug\net6.0\InputManager.Test.csproj.AssemblyReference.cache
+E:\Unity Projects\AStoryYouWrote\InputManager.Test\obj\Debug\net6.0\InputManager.Test.GeneratedMSBuildEditorConfig.editorconfig
+E:\Unity Projects\AStoryYouWrote\InputManager.Test\obj\Debug\net6.0\InputManager.Test.AssemblyInfoInputs.cache
+E:\Unity Projects\AStoryYouWrote\InputManager.Test\obj\Debug\net6.0\InputManager.Test.AssemblyInfo.cs
+E:\Unity Projects\AStoryYouWrote\InputManager.Test\obj\Debug\net6.0\InputManager.Test.csproj.CoreCompileInputs.cache
