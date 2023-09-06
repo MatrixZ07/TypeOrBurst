@@ -151,7 +151,6 @@ MonoBehaviour:
   enemySpriteRenderer: {fileID: 1446248124171737141}
   text: {fileID: 1868548529402323010}
   word:
-    highscore: {fileID: 0}
     word: 
     wordArray: []
   particleHandler: {fileID: 2033969528145008123}
@@ -323,6 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 30
   trail: {fileID: 2839420076987980504}
+  explosion: {fileID: 2998924084158759986}
 --- !u!114 &2687082856938442355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,8 +335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43d0de5260823c4ab9407b46c9dba5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 2.1
   verticalSpeed: 0.2
+  rotationSpeed: 2.1
 --- !u!114 &2868259271518957568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,7 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb547784fedaa44086bb6245b43168c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCollider: {fileID: 2166867517178730304}
   materials:
   - {fileID: 2100000, guid: 6d251f723486baf418ab1607c2eb965b, type: 2}
   - {fileID: 2100000, guid: b633a1f45979bc749b6a5478e175ee33, type: 2}
@@ -369,8 +368,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1c8fe4ffa28e10a46978e37c14ad74aa, type: 2}
   - {fileID: 2100000, guid: 33bd96a0a36a821428a736ead7d764b7, type: 2}
   - {fileID: 2100000, guid: 3bf2b07dca6f552478c3a6bdb93df574, type: 2}
-  trail: {fileID: 2839420076987980504}
-  explosionParticles: {fileID: 2998924084158759986}
 --- !u!199 &6092626246178065399
 ParticleSystemRenderer:
   serializedVersion: 6

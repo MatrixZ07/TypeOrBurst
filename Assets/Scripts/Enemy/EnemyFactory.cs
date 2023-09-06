@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyFactory : MonoBehaviour
 {
-    public int damage = 30;
-    public ParticleSystem trail;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        //trail.Play();
-        trail.Play();
+        
     }
 
     // Update is called once per frame

@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-/*
- 
- 
- */
 public class WordManager : MonoBehaviour
 {
     public List<Word> words;
@@ -27,7 +23,7 @@ public class WordManager : MonoBehaviour
     private int streakCap = 10;
 
     public int spawncount=10;
-    public int waveCount=0; //Wave-Z�hler
+    public int waveIndex=0; //WaveManager-Z�hler
     Coroutine waveSpawn;
     public int enemiesIncoming; //Verbleibende Enemies der momentanen Welle
     private bool wavefinished;
@@ -48,11 +44,16 @@ public class WordManager : MonoBehaviour
      * Streak wird in Welle 1 zur�ckgesetzt, sonst beibehalten
      * verbleibende Enemies werden jede Welle gesetzt.
      */
-    public void StartWave() {
-        if (WaveCompleted()) {
-            waveCount++;
-            hudManager.ShowWaveDisplay(waveCount);
-            if (waveCount == 1)
+
+
+
+    public void StartWave()
+    {
+        if (WaveCompleted())
+        {
+            waveIndex++;
+            hudManager.ShowWaveDisplay(waveIndex);
+            if (waveIndex == 1)
             {
                 streak = 0;
                 spawnTimer = 3f;
@@ -60,30 +61,35 @@ public class WordManager : MonoBehaviour
             spawncount += 10;
             enemiesIncoming = spawncount;
             words = new List<Word>();
-            if (waveCount < 2)
+            if (waveIndex < 2)
             {
                 waveSpawn = StartCoroutine(AddWords(spawncount, 1));
             }
-            else if (waveCount < 3)
+            else if (waveIndex < 3)
             {
                 waveSpawn = StartCoroutine(AddWords(spawncount, 2));
             }
-            else if (waveCount < 4)
+            else if (waveIndex < 4)
             {
                 waveSpawn = StartCoroutine(AddWords(spawncount, 3));
             }
-            else { 
+            else
+            {
                 waveSpawn = StartCoroutine(AddWords(spawncount, 4));
             }
         }
     }
-    public bool WaveCompleted() {
-        if (words.Count == 0 && enemiesIncoming == 0) {
+    public bool WaveCompleted()
+    {
+        if (words.Count == 0 && enemiesIncoming == 0)
+        {
             wavefinished = true;
             return wavefinished;
-        } else {
+        }
+        else
+        {
             wavefinished = false;
-            return wavefinished; 
+            return wavefinished;
         }
     }
     public void StopWave()
@@ -92,6 +98,9 @@ public class WordManager : MonoBehaviour
         StopCoroutine(waveSpawn);
         wavefinished = true;
     }
+
+
+
     // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ENEMY-GENERATION XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     //Single-Spawn eines Wortes
     public void AddWord(WordDisplay wordDisplay, int enemyType)
@@ -110,7 +119,6 @@ public class WordManager : MonoBehaviour
 	 */
     IEnumerator AddWords(int wordCount,int possibleEnemyTypes) //zeitverschobenes Spawnen einzelner Gegner(typen)
     {
-        
         for (int i = 0; i < wordCount; i++)
         {
             int randomType = randomEnemyType.GetRandomEnemyType(possibleEnemyTypes);
@@ -133,7 +141,7 @@ public class WordManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(1f,spawnTimer));
         }
         yield return new WaitUntil(() => WaveCompleted());
-        Debug.Log("Wave nummer " + waveCount + " besiegt! ");
+        Debug.Log("WaveManager nummer " + waveIndex + " besiegt! ");
         StartWave();
     }
     /*
@@ -276,7 +284,7 @@ public class WordManager : MonoBehaviour
         fiveToGo = 0;
         streak = 0;
         spawncount = 10;
-        waveCount = 0;
+        waveIndex = 0;
         enemiesIncoming = 0;
         wavefinished = true;
         words = new List<Word>();

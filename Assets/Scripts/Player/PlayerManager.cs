@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
         hitCount++;
         Debug.Log("Player Hit " + hitCount + "times");
         //Ziehe Leben ab
-        int damage= collision.gameObject.GetComponent<EnemyManager>().damage;
+        int damage= collision.gameObject.GetComponent<Enemy>().damage;
         TakeDamage(damage);
         //Lebt Spieler noch?
         gameManager.IsPlayerDead(IsPlayerDead);

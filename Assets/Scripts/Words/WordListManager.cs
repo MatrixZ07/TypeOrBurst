@@ -15,7 +15,7 @@ public class WordListManager : MonoBehaviour
 	public static bool useCustomWordList = false;
 	public static bool hasCustomWordList = false;
 
-	
+
 	public TMP_InputField customWordInput;
 	static List<string> customWordList = new List<string>();
 
@@ -27,17 +27,17 @@ public class WordListManager : MonoBehaviour
 
 	//Variable zur Speicherung der Dateipfade
 	private static string defaultWordListPath;
-	private static string customWordListPath ;
+	private static string customWordListPath;
 
-    private void Awake()
-    {
+	private void Awake()
+	{
 		defaultWordListPath = Application.persistentDataPath + "/defaultWordList.json";
 		customWordListPath = Application.persistentDataPath + "/customWordList.json";
 
 	}
 
-    private void Start()
-    {
+	private void Start()
+	{
 		settingsMenu.LoadPlayerPrefs();
 		if (File.Exists(customWordListPath))
 		{
@@ -45,7 +45,7 @@ public class WordListManager : MonoBehaviour
 			customWordList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(customWordListPath));
 			//customWordList = JsonUtility.FromJson<List<string>>(File.ReadAllText(customWordListPath)).Distinct().ToList();
 		}
-		if (File.Exists(defaultWordListPath)) { 
+		if (File.Exists(defaultWordListPath)) {
 			Debug.Log("Default Word List Path does exist!");
 			//defaultWordList = JsonUtility.FromJson<List<string>>(File.ReadAllText(defaultWordListPath)).Distinct().ToList();
 			defaultWordList = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(defaultWordListPath));
@@ -63,31 +63,31 @@ public class WordListManager : MonoBehaviour
 			string jsonData = JsonConvert.SerializeObject(defaultWordList);
 			File.WriteAllText(defaultWordListPath, jsonData);
 		}
-		activeWordList = (hasCustomWordList && useCustomWordList && customWordList.Count>0) ? customWordList : defaultWordList;
+		activeWordList = (hasCustomWordList && useCustomWordList && customWordList.Count > 0) ? customWordList : defaultWordList;
 		/**/
 		Debug.Log("Contents of Active Word Lists after Start() are: ");
 		foreach (string word in activeWordList) Debug.Log(word.ToString());
 		/**/
-    }
+	}
 
-    public void CreateCustomWordList() { //Aufgerufen über den Save Button in den Settings
+	public void CreateCustomWordList() { //Aufgerufen über den Save Button in den Settings
 		customWordList = new List<string>();
 		string trimmed = System.String.Concat(customWordInput.text.Where(c => !System.Char.IsWhiteSpace(c)));
 		Debug.Log("Trimmed customWordList is : " + trimmed);
-		if (trimmed != "" && trimmed.Length>0) { 
-			string [] wordarray = customWordInput.text.Split(' ');
+		if (trimmed != "" && trimmed.Length > 0) {
+			string[] wordarray = customWordInput.text.Split(' ');
 			foreach (string word in wordarray) {
 				customWordList.Add(word);
 			}
 			customWordList = customWordList.Distinct().ToList();
-        }
-		else{
+		}
+		else {
 			Debug.Log("Creating CustomWordList failed. Check Input. Make sure to separate words with a space character");
 		}
 	}
 
 	public void SaveCustomWordListToJSON() //Aufgerufen über den Save Button in den Settings
-	{ 
+	{
 		Debug.Log(customWordList.Count.ToString());
 		if (customWordList.Count > 0)
 		{
@@ -134,26 +134,15 @@ public class WordListManager : MonoBehaviour
 		}
 	}
 
-
-	public string GetRandomWord()
-    {
-		activeWordList = (hasCustomWordList && useCustomWordList) ? customWordList : defaultWordList;
-		string randomWord = GetUniqueWord();
-		return randomWord;
-    }
-
-	//returns a Word, whiches first letter is not used in the current List of Words of WordManager
 	public string GetUniqueWord() {
-		int randomIndex = Random.Range(0, activeWordList.Count);
-		bool isUsed = false;
-		if (wordManager.words.Count > 0) { 
-			foreach (Word word in wordManager.words) {
-				if (word.word[0] == activeWordList[randomIndex][0]) isUsed = true;
-				break;
-			}
-		}
-		return (isUsed)? GetUniqueWord() : activeWordList[randomIndex];
+		activeWordList = (hasCustomWordList && useCustomWordList) ? customWordList : defaultWordList;
+
+		var filteredList = activeWordList.Where(word => !wordManager.words.Any(secondWord => char.ToLower(word[0]) == char.ToLower(secondWord.word[0])));
+
+		int randomIndex = Random.Range(0, filteredList.Count<string>());
+		return filteredList.ElementAt(randomIndex);
 	}
+
 	/*Returns an array whiches size is based on the enemyTypeIndex
 	 * Type Range: 1-4
 	 * Type 1: Normal Enemy
@@ -169,14 +158,23 @@ public class WordListManager : MonoBehaviour
 			wordArray = new string[2];
 			for (int i = 0; i < wordArray.Length; i++)
 			{
-				wordArray[i] = GetRandomWord();
+				wordArray[i] = GetUniqueWord();
 			}
 		}
 		else {
 			wordArray = new string[1];
-			wordArray[0] = GetRandomWord();
+			wordArray[0] = GetUniqueWord();
 		}
 		return wordArray;
 	}
+
+	// 2023: Neue Implementierungsmöglichkeit: 
+	//public string[] GetRandomWordArray(EnemyType enemyType)
+	//{
+	//	if (enemyType == EnemyType.Tank)
+	//		return new string[]{ GetRandomWord(),GetRandomWord()};
+
+	//	return new string[] { GetRandomWord() };
+	//}
 
 }

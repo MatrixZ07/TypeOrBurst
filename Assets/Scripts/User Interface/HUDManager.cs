@@ -72,8 +72,8 @@ public class HUDManager : MonoBehaviour
         }
     }
     
-    public void ShowWaveDisplay(int wave) {
-        waveDisplay.text = "Wave " + wave.ToString();
+    public void ShowWaveDisplay(int waveIndex) {
+        waveDisplay.text = "Wave " + waveIndex.ToString();
         waveDisplay.gameObject.SetActive(true);
         showWaveDisplay = true;
     }
