@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8293771246571977592}
   - component: {fileID: -2711259726274767802}
   - component: {fileID: 6724371536795528021}
+  - component: {fileID: 372185484584206785}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -149,8 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  trail: {fileID: 6724371536795528021}
-  explosion: {fileID: 5667933064872101138}
 --- !u!114 &6838363256865669767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4968,6 +4967,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &372185484584206785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6511800248717949116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c061163ea8ee99409a47a8576f46a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trail: {fileID: 6724371536795528021}
+  explosion: {fileID: 5667933064872101138}
 --- !u!1 &8739406413659398339
 GameObject:
   m_ObjectHideFlags: 0
@@ -5116,7 +5129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f271886c659925499dc2cdab918923b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpriteRenderer: {fileID: 2008865141708439014}
   text: {fileID: 3182261493188990753}
   word:
     word: 

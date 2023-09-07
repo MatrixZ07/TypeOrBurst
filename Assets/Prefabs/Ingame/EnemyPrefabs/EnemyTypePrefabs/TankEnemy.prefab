@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f271886c659925499dc2cdab918923b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpriteRenderer: {fileID: 1446248124171737141}
   text: {fileID: 1868548529402323010}
   word:
     word: 
@@ -189,6 +188,7 @@ GameObject:
   - component: {fileID: 2033969528145008123}
   - component: {fileID: 6092626246178065399}
   - component: {fileID: 2839420076987980504}
+  - component: {fileID: -9122248710148946411}
   m_Layer: 0
   m_Name: TankEnemy
   m_TagString: Enemy
@@ -321,8 +321,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 30
-  trail: {fileID: 2839420076987980504}
-  explosion: {fileID: 2998924084158759986}
 --- !u!114 &2687082856938442355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5140,6 +5138,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &-9122248710148946411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2929514210993637767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c061163ea8ee99409a47a8576f46a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trail: {fileID: 2839420076987980504}
+  explosion: {fileID: 2998924084158759986}
 --- !u!1001 &4593509677772043410
 PrefabInstance:
   m_ObjectHideFlags: 0
